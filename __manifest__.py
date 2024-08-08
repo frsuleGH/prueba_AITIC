@@ -5,10 +5,10 @@
     'description': """
         AITIC
     """,
-    'depends': ['base', 'sale'],
+    'depends': ['base', 'sale', 'sale_management'],
     'data': [
-        'views/sale_order_views.xml'
-    ],
+        'views/sale_order_views.xml',
+            ],
     'installable': True,
     'application': True,
 }
