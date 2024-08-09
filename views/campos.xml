@@ -1,10 +1,17 @@
 <odoo>
+    <!-- Registro para heredar la vista de formulario de orden de venta y agregar campos personalizados -->
     <record id="view_order_form_inherit" model="ir.ui.view">
+        <!-- Nombre de la vista -->
         <field name="name">sale.order.form.inherit</field>
+        <!-- Modelo al que se aplica la vista -->
         <field name="model">sale.order</field>
+        <!-- Identificador de la vista a heredar -->
         <field name="inherit_id" ref="sale.view_order_form"/>
+        <!-- Definición de la estructura XML de la vista -->
         <field name="arch" type="xml">
+            <!-- XPath para insertar contenido dentro de la hoja de la vista -->
             <xpath expr="//sheet" position="inside">
+                <!-- Grupo de campos con estilos de margen superior -->
                 <group class="mt-3">
                     <field name="campo_personalizado_1"/>
                     <field name="campo_personalizado_2"/>

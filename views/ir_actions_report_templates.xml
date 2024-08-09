@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- 
+        Template personalizado para el informe de documento de orden de venta.
+        Hereda el template original de Odoo para la orden de venta y agrega campos personalizados.
+    -->
     <template id="report_saleorder_document_custom" inherit_id="sale.report_saleorder_document">
+        <!-- 
+            XPath para insertar contenido dentro del contenedor de la página.
+        -->
         <xpath expr="//div[@class='page']" position="inside">
             
+            <!-- 
+                Contenedor para los campos personalizados.
+            -->
             <div class="row mt-4 mb-4">
+                <!-- 
+                    Campo personalizado 1: se muestra solo si está definido.
+                -->
                 <t t-if="doc.campo_personalizado_1">
                     <div class="col-auto col-3 mw-100 mb-2">
                         <strong>Campo Personalizado 1:</strong>
                         <p class="m-0" t-field="doc.campo_personalizado_1"/>
                     </div>
                 </t>
+                <!-- 
+                    Campo personalizado 2: se muestra solo si está definido.
+                -->
                 <t t-if="doc.campo_personalizado_2">
                     <div class="col-auto col-3 mw-100 mb-2">
                         <strong>Campo Personalizado 2:</strong>
                         <p class="m-0" t-field="doc.campo_personalizado_2"/>
                     </div>
                 </t>
+                <!-- 
+                    Campo personalizado 3: se muestra solo si está definido.
+                -->
                 <t t-if="doc.campo_personalizado_3">
                     <div class="col-auto col-3 mw-100 mb-2">
                         <strong>Campo Personalizado 3:</strong>

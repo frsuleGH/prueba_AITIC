@@ -1,15 +1,24 @@
 <odoo>
     <!-- Vista de Formulario para el Informe de Ventas -->
     <record id="view_informe_ventas_form" model="ir.ui.view">
+        <!-- Nombre de la vista -->
         <field name="name">informe.ventas.form</field>
+        <!-- Modelo al que se aplica la vista -->
         <field name="model">informe.ventas</field>
+        <!-- Definición de la estructura XML de la vista -->
         <field name="arch" type="xml">
+            <!-- Formulario con el título "Informe de Ventas" -->
             <form string="Informe de Ventas">
+                <!-- Hoja del formulario -->
                 <sheet>
+                    <!-- Grupo de campos -->
                     <group>
+                        <!-- Campo para la fecha de inicio -->
                         <field name="fecha_inicio"/>
+                        <!-- Campo para la fecha de fin -->
                         <field name="fecha_fin"/>
                     </group>
+                    <!-- Pie del formulario con un botón para generar el informe -->
                     <footer>
                         <button string="Generar Informe" type="object" name="action_generate_report" class="oe_highlight"/>
                     </footer>
@@ -20,10 +29,15 @@
 
     <!-- Acción para el Informe de Ventas -->
     <record id="action_informe_ventas" model="ir.actions.act_window">
+        <!-- Nombre de la acción -->
         <field name="name">Informe de Ventas</field>
+        <!-- Modelo al que se aplica la acción -->
         <field name="res_model">informe.ventas</field>
+        <!-- Modo de visualización de la vista -->
         <field name="view_mode">form</field>
+        <!-- Identificador de la vista a abrir -->
         <field name="view_id" ref="view_informe_ventas_form"/>
+        <!-- Objetivo de la acción -->
         <field name="target">new</field>
     </record>
 
@@ -35,10 +49,15 @@
 
     <!-- Definición del Informe -->
     <record id="informe_ventas_action" model="ir.actions.report">
+        <!-- Nombre del informe -->
         <field name="name">Informe de Ventas</field>
+        <!-- Modelo al que se aplica el informe -->
         <field name="model">informe.ventas</field>
+        <!-- Tipo de informe -->
         <field name="report_type">qweb-pdf</field>
+        <!-- Nombre del informe en el archivo -->
         <field name="report_name">ventas_aitic.report_informe_ventas</field>
+        <!-- Nombre del archivo del informe -->
         <field name="report_file">ventas_aitic.report_informe_ventas</field>
     </record>
 </odoo>

@@ -1,12 +1,12 @@
 <odoo>
     <data>
-        <!-- Hereda la vista de formulario de línea de orden de venta -->
+        <!-- Esta vista hereda la vista de formulario de línea de orden de venta para reemplazar el campo de descuento nativo por 'sol_discount' -->
         <record id="view_order_line_form_discount" model="ir.ui.view">
             <field name="name">sale.order.line.form.inherit.discount</field>
             <field name="model">sale.order.line</field>
             <field name="inherit_id" ref="sale.view_order_line_form"/>
             <field name="arch" type="xml">
-                <!-- Reemplaza el campo de descuento nativo por sol_discount -->
+                <!-- XPath para reemplazar el campo de descuento nativo por 'sol_discount' -->
                 <xpath expr="//field[@name='discount']" position="replace">
                     <field name="sol_discount" widget="percentage"/>
                 </xpath>

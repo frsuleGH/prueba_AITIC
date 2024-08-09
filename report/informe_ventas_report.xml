@@ -1,45 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 
+    Este archivo define el template del informe de ventas. 
+    El informe muestra un resumen de las ventas, incluyendo la fecha de inicio y fin, 
+    y una tabla que lista los productos vendidos, los clientes y los ingresos totales. 
+-->
 <odoo>
+    <!-- 
+        Definición del template del informe de ventas 
+    -->
     <template id="report_informe_ventas">
+        <!-- 
+            Llamada al contenedor HTML 
+        -->
         <t t-call="web.html_container">
+            <!-- 
+                Llamada al layout básico 
+            -->
             <t t-call="web.basic_layout">
+                <!-- 
+                    Contenedor de la página 
+                -->
                 <div class="page">
+                    <!-- 
+                        Título del informe 
+                    -->
                     <h2>Informe de Ventas Mensuales</h2>
+                    <!-- 
+                        Fecha de inicio del informe 
+                    -->
                     <p>Fecha de Inicio: <t t-esc="docs.fecha_inicio"/></p>
+                    <!-- 
+                        Fecha de fin del informe 
+                    -->
                     <p>Fecha de Fin: <t t-esc="docs.fecha_fin"/></p>
 
+                    <!-- 
+                        Tabla que muestra los productos vendidos, clientes y ingresos 
+                    -->
                     <table class="table table-sm">
+                        <!-- 
+                            Cabecera de la tabla 
+                        -->
                         <thead>
                             <tr>
+                                <!-- 
+                                    Columna de productos 
+                                -->
                                 <th>Producto</th>
+                                <!-- 
+                                    Columna de clientes 
+                                -->
                                 <th>Cliente</th>
+                                <!-- 
+                                    Columna de ingresos 
+                                -->
                                 <th>Ingresos</th>
                             </tr>
                         </thead>
+                        <!-- 
+                            Cuerpo de la tabla 
+                        -->
                         <tbody>
-                            <!-- Bucle para iterar sobre todas las órdenes de venta -->
+                            <!-- 
+                                Bucle para iterar sobre todas las órdenes de venta 
+                            -->
                             <t t-foreach="docs.sale_order_ids" t-as="order">
-                                <!-- Bucle para iterar sobre todas las líneas de cada orden de venta -->
+                                <!-- 
+                                    Bucle para iterar sobre todas las líneas de cada orden de venta 
+                                -->
                                 <t t-foreach="order.order_line" t-as="line">
                                     <tr>
+                                        <!-- 
+                                            Celda que muestra el nombre del producto 
+                                        -->
                                         <td><t t-esc="line.product_id.name"/></td>
+                                        <!-- 
+                                            Celda que muestra el nombre del cliente 
+                                        -->
                                         <td><t t-esc="order.partner_id.name"/></td>
+                                        <!-- 
+                                            Celda que muestra el ingreso total 
+                                        -->
                                         <td><t t-esc="line.price_total"/></td>
                                     </tr>
                                 </t>
                             </t>
                         </tbody>
+                        <!-- 
+                            Pie de la tabla 
+                        -->
                         <tfoot>
-                            <!-- Mostrar el total acumulado -->
+                            <!-- 
+                                Fila que muestra el total acumulado 
+                            -->
                             <tr>
+                                <!-- 
+                                    Celda que muestra el total acumulado 
+                                -->
                                 <td colspan="2" class="text-right"><strong>Total:</strong></td>
                                 <td>
+                                    <!-- 
+                                        Variable que acumula el total 
+                                    -->
                                     <t t-set="total" t-value="0"/>
+                                    <!-- 
+                                        Bucle para iterar sobre todas las órdenes de venta 
+                                    -->
                                     <t t-foreach="docs.sale_order_ids" t-as="order">
+                                        <!-- 
+                                            Bucle para iterar sobre todas las líneas de cada orden de venta 
+                                        -->
                                         <t t-foreach="order.order_line" t-as="line">
+                                            <!-- 
+                                                Acumula el total 
+                                            -->
                                             <t t-set="total" t-value="total + line.price_total"/>
                                         </t>
                                     </t>
+                                    <!-- 
+                                        Muestra el total acumulado 
+                                    -->
                                     <t t-esc="total"/>
                                 </td>
                             </tr>
