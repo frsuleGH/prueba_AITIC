@@ -1,38 +1,61 @@
 <odoo>
+    <!-- Definición del Informe -->
+    <record id="informe_ventas_action" model="ir.actions.report">
+        <field name="name">Informe de Ventas</field>
+        <field name="model">informe.ventas</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ventas_aitic.report_informe_ventas</field>
+        <field name="report_file">ventas_aitic.report_informe_ventas</field>
+        <field name="print_report_name">object.name</field>
+    </record>
+
+    <!-- Plantilla del Informe -->
     <template id="report_informe_ventas">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
-                <div class="page">
-                    <h2>Informe de Ventas Mensuales</h2>
-                    <p>Fecha Inicio: <t t-esc="doc.fecha_inicio"/></p>
-                    <p>Fecha Fin: <t t-esc="doc.fecha_fin"/></p>
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cliente</th>
-                                <th>Ingresos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr t-foreach="doc.detalle_ventas" t-as="venta">
-                                <td><t t-esc="venta.producto"/></td>
-                                <td><t t-esc="venta.cliente"/></td>
-                                <td><t t-esc="venta.ingresos"/></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Informe de Ventas Mensuales</h2>
+                        <p>Fecha de Inicio: <t t-esc="doc.fecha_inicio"/></p>
+                        <p>Fecha de Fin: <t t-esc="doc.fecha_fin"/></p>
+                        <p>Ingresos Totales: <t t-esc="ingresos_totales"/></p>
+                        <h3>Desglose por Producto</h3>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Ingresos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="desglose_producto.items()" t-as="item">
+                                    <tr>
+                                        <td><t t-esc="item[0].name"/></td>
+                                        <td><t t-esc="item[1]"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <h3>Desglose por Cliente</h3>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Ingresos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="desglose_cliente.items()" t-as="item">
+                                    <tr>
+                                        <td><t t-esc="item[0].name"/></td>
+                                        <td><t t-esc="item[1]"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
             </t>
         </t>
     </template>
-
-    <report
-        id="report_informe_ventas_pdf"
-        model="informe.ventas.mensuales"
-        string="Informe de Ventas"
-        report_type="qweb-pdf"
-        name="informe_ventas_mensuales.report_informe_ventas"
-        file="informe_ventas_mensuales.report_informe_ventas"
-        attachment_use="False"/>
 </odoo>

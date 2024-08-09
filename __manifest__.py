@@ -5,7 +5,7 @@
     'description': """
         AITIC
     """,
-    'depends': ['base', 'sale'],
+    'depends': ['base', 'sale', 'sale_management'],
     'data': [
         'views/campos.xml',
         'views/discount_views.xml',

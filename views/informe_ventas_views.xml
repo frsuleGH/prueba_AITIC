@@ -1,32 +1,35 @@
 <odoo>
-    <!-- Definición de la vista -->
+    <!-- Vista de Formulario para el Informe de Ventas -->
     <record id="view_informe_ventas_form" model="ir.ui.view">
-        <field name="name">informe.ventas.mensuales.form</field>
-        <field name="model">informe.ventas.mensuales</field>
+        <field name="name">informe.ventas.form</field>
+        <field name="model">informe.ventas</field>
         <field name="arch" type="xml">
-            <form string="Informe de Ventas Mensuales">
+            <form string="Informe de Ventas">
                 <sheet>
                     <group>
                         <field name="fecha_inicio"/>
                         <field name="fecha_fin"/>
                     </group>
+                    <footer>
+                        <button string="Generar Informe" type="object" name="action_generate_report" class="oe_highlight"/>
+                    </footer>
                 </sheet>
-                <footer>
-                    <button name="action_generar_informe" string="Generar Informe" type="object" class="btn-primary"/>
-                </footer>
             </form>
         </field>
     </record>
 
-    <!-- Definición de la acción -->
+    <!-- Acción para el Informe de Ventas -->
     <record id="action_informe_ventas" model="ir.actions.act_window">
-        <field name="name">Informe de Ventas Mensuales</field>
-        <field name="res_model">informe.ventas.mensuales</field>
+        <field name="name">Informe de Ventas</field>
+        <field name="res_model">informe.ventas</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_informe_ventas_form"/>
         <field name="target">new</field>
     </record>
 
-    <!-- Definición del menú -->
-    <menuitem id="menu_informes_ventas" name="Informes de Ventas Mensuales" parent="sale.menu_sale_report" action="action_informe_ventas"/>
+    <!-- Menú Principal -->
+    <menuitem id="menu_ventas" name="Informe" sequence="10"/>
+
+    <!-- Menú para el Informe de Ventas -->
+    <menuitem id="menu_informe_ventas" name="Informes de Ventas" parent="menu_ventas" action="action_informe_ventas" sequence="10"/>
 </odoo>
