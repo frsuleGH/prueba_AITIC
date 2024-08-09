@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Action to open the tree view of customer.product.discount -->
+    <!-- Acción para abrir la vista de árbol de customer.product.discount -->
     <record id="action_customer_product_discount" model="ir.actions.act_window">
         <field name="name">Descuentos</field>
         <field name="res_model">customer.product.discount</field>
@@ -12,25 +12,25 @@
         </field>
     </record>
 
-    <!-- Tree view -->
+    <!-- Vista de árbol -->
     <record id="view_customer_product_discount_tree" model="ir.ui.view">
         <field name="name">customer.product.discount.tree</field>
         <field name="model">customer.product.discount</field>
         <field name="arch" type="xml">
-            <tree string="Customer Product Discounts">
-                <field name="customer_id"/>
-                <field name="product_id"/>
-                <field name="discount"/>
+            <tree string="Descuentos por Producto y Cliente">
+                <field name="customer_id" string="Cliente"/>
+                <field name="product_id" string="Producto"/>
+                <field name="discount" string="Descuento (%)"/>
             </tree>
         </field>
     </record>
 
-    <!-- Form view -->
+    <!-- Vista de formulario -->
     <record id="view_customer_product_discount_form" model="ir.ui.view">
         <field name="name">customer.product.discount.form</field>
         <field name="model">customer.product.discount</field>
         <field name="arch" type="xml">
-            <form string="Descuento de Producto del Cliente">
+            <form string="Descuento por Producto y Cliente">
                 <group>
                     <field name="customer_id" string="Cliente"/>
                     <field name="product_id" string="Producto"/>
@@ -40,6 +40,7 @@
         </field>
     </record>
 
+    <!-- Acceso al modelo customer.product.discount -->
     <record id="model_customer_product_discount_access" model="ir.model.access">
         <field name="name">acceso a descuentos de producto y cliente</field>
         <field name="model_id" ref="model_customer_product_discount"/>
