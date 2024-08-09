@@ -6,8 +6,8 @@
             <field name="model">sale.order.line</field>
             <field name="inherit_id" ref="sale.view_order_line_form"/>
             <field name="arch" type="xml">
-                <!-- Añade el campo de descuento personalizado -->
-                <xpath expr="//field[@name='price_unit']" position="after">
+                <!-- Reemplaza el campo de descuento nativo por sol_discount -->
+                <xpath expr="//field[@name='discount']" position="replace">
                     <field name="sol_discount" widget="percentage"/>
                 </xpath>
             </field>
