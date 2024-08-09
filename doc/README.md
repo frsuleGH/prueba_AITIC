@@ -1,10 +1,10 @@
-Documentación del Módulo de Informe de Ventas
+Documentación del módulo ventas_aitic v 16
 =============================================
 
 1. Instalación
 -------------
 
-Para instalar el módulo de Informe de Ventas en Odoo, sigue estos pasos:
+Para instalar el módulo , sigue estos pasos:
 
 1. Clona el repositorio:
     ```
