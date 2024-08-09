@@ -32,4 +32,13 @@
 
     <!-- Menú para el Informe de Ventas -->
     <menuitem id="menu_informe_ventas" name="Informes de Ventas" parent="menu_ventas" action="action_informe_ventas" sequence="10"/>
+
+    <!-- Definición del Informe -->
+    <record id="informe_ventas_action" model="ir.actions.report">
+        <field name="name">Informe de Ventas</field>
+        <field name="model">informe.ventas</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ventas_aitic.report_informe_ventas</field>
+        <field name="report_file">ventas_aitic.report_informe_ventas</field>
+    </record>
 </odoo>

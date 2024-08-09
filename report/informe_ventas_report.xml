@@ -1,54 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Definición del Informe -->
-    <record id="informe_ventas_action" model="ir.actions.report">
-        <field name="name">Informe de Ventas</field>
-        <field name="model">informe.ventas</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">ventas_aitic.report_informe_ventas</field>
-        <field name="report_file">ventas_aitic.report_informe_ventas</field>
-        <field name="print_report_name">object.name</field>
-    </record>
-
-    <!-- Plantilla del Informe -->
     <template id="report_informe_ventas">
         <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="doc">
-                <t t-call="web.external_layout">
+            <t t-foreach="docs.sale_order_ids" t-as="order">
+                <t t-call="web.basic_layout">
                     <div class="page">
                         <h2>Informe de Ventas Mensuales</h2>
-                        <p>Fecha de Inicio: <t t-esc="doc.fecha_inicio"/></p>
-                        <p>Fecha de Fin: <t t-esc="doc.fecha_fin"/></p>
-                        <p>Ingresos Totales: <t t-esc="ingresos_totales"/></p>
-                        <h3>Desglose por Producto</h3>
+                        <p>Fecha de Inicio: <t t-esc="docs.fecha_inicio"/></p>
+                        <p>Fecha de Fin: <t t-esc="docs.fecha_fin"/></p>
                         <table class="table table-sm">
                             <thead>
                                 <tr>
                                     <th>Producto</th>
-                                    <th>Ingresos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="desglose_producto.items()" t-as="item">
-                                    <tr>
-                                        <td><t t-esc="item[0].name"/></td>
-                                        <td><t t-esc="item[1]"/></td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
-                        <h3>Desglose por Cliente</h3>
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
                                     <th>Cliente</th>
                                     <th>Ingresos</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="desglose_cliente.items()" t-as="item">
+                                <t t-foreach="order.order_line" t-as="line">
                                     <tr>
-                                        <td><t t-esc="item[0].name"/></td>
-                                        <td><t t-esc="item[1]"/></td>
+                                        <td><t t-esc="line.product_id.name"/></td>
+                                        <td><t t-esc="order.partner_id.name"/></td>
+                                        <td><t t-esc="line.price_total"/></td>
                                     </tr>
                                 </t>
                             </tbody>
