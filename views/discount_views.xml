@@ -1,0 +1,59 @@
+<odoo>
+    <!-- Action to open the tree view of customer.product.discount -->
+    <record id="action_customer_product_discount" model="ir.actions.act_window">
+        <field name="name">Descuentos</field>
+        <field name="res_model">customer.product.discount</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_customer_product_discount_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configura los descuentos por cliente y producto.
+            </p>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_customer_product_discount_tree" model="ir.ui.view">
+        <field name="name">customer.product.discount.tree</field>
+        <field name="model">customer.product.discount</field>
+        <field name="arch" type="xml">
+            <tree string="Customer Product Discounts">
+                <field name="customer_id"/>
+                <field name="product_id"/>
+                <field name="discount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_customer_product_discount_form" model="ir.ui.view">
+        <field name="name">customer.product.discount.form</field>
+        <field name="model">customer.product.discount</field>
+        <field name="arch" type="xml">
+            <form string="Descuento de Producto del Cliente">
+                <group>
+                    <field name="customer_id" string="Cliente"/>
+                    <field name="product_id" string="Producto"/>
+                    <field name="discount" string="Descuento (%)"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="model_customer_product_discount_access" model="ir.model.access">
+        <field name="name">acceso a descuentos de producto y cliente</field>
+        <field name="model_id" ref="model_customer_product_discount"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Menú principal visible para todos los usuarios -->
+    <menuitem id="menu_discount" name="Descuentos" sequence="1" groups="base.group_user"/>
+
+    <!-- Submenú vinculado a la acción -->
+    <menuitem id="submenu_customer_product_discount" name="Descuentos por Producto y Cliente" parent="menu_discount"
+              action="action_customer_product_discount" sequence="1" groups="base.group_user"/>
+</odoo>

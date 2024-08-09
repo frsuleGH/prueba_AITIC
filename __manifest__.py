@@ -7,8 +7,10 @@
     """,
     'depends': ['base', 'sale'],
     'data': [
-        'views/sale_order_views.xml',
-        'views/ir_actions_report_templates.xml'
+        'views/campos.xml',
+        'views/discount_views.xml',
+        'views/ir_actions_report_templates.xml',
+        'views/campos.xml',
             ],
     'installable': True,
     'application': True,
