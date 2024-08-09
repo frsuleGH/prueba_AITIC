@@ -2,21 +2,24 @@
 <odoo>
     <template id="report_informe_ventas">
         <t t-call="web.html_container">
-            <t t-foreach="docs.sale_order_ids" t-as="order">
-                <t t-call="web.basic_layout">
-                    <div class="page">
-                        <h2>Informe de Ventas Mensuales</h2>
-                        <p>Fecha de Inicio: <t t-esc="docs.fecha_inicio"/></p>
-                        <p>Fecha de Fin: <t t-esc="docs.fecha_fin"/></p>
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cliente</th>
-                                    <th>Ingresos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <h2>Informe de Ventas Mensuales</h2>
+                    <p>Fecha de Inicio: <t t-esc="docs.fecha_inicio"/></p>
+                    <p>Fecha de Fin: <t t-esc="docs.fecha_fin"/></p>
+
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cliente</th>
+                                <th>Ingresos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Bucle para iterar sobre todas las órdenes de venta -->
+                            <t t-foreach="docs.sale_order_ids" t-as="order">
+                                <!-- Bucle para iterar sobre todas las líneas de cada orden de venta -->
                                 <t t-foreach="order.order_line" t-as="line">
                                     <tr>
                                         <td><t t-esc="line.product_id.name"/></td>
@@ -24,10 +27,25 @@
                                         <td><t t-esc="line.price_total"/></td>
                                     </tr>
                                 </t>
-                            </tbody>
-                        </table>
-                    </div>
-                </t>
+                            </t>
+                        </tbody>
+                        <tfoot>
+                            <!-- Mostrar el total acumulado -->
+                            <tr>
+                                <td colspan="2" class="text-right"><strong>Total:</strong></td>
+                                <td>
+                                    <t t-set="total" t-value="0"/>
+                                    <t t-foreach="docs.sale_order_ids" t-as="order">
+                                        <t t-foreach="order.order_line" t-as="line">
+                                            <t t-set="total" t-value="total + line.price_total"/>
+                                        </t>
+                                    </t>
+                                    <t t-esc="total"/>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </t>
         </t>
     </template>
