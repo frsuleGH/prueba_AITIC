@@ -1,0 +1,38 @@
+<odoo>
+    <template id="report_informe_ventas">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Informe de Ventas Mensuales</h2>
+                    <p>Fecha Inicio: <t t-esc="doc.fecha_inicio"/></p>
+                    <p>Fecha Fin: <t t-esc="doc.fecha_fin"/></p>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cliente</th>
+                                <th>Ingresos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.detalle_ventas" t-as="venta">
+                                <td><t t-esc="venta.producto"/></td>
+                                <td><t t-esc="venta.cliente"/></td>
+                                <td><t t-esc="venta.ingresos"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="report_informe_ventas_pdf"
+        model="informe.ventas.mensuales"
+        string="Informe de Ventas"
+        report_type="qweb-pdf"
+        name="informe_ventas_mensuales.report_informe_ventas"
+        file="informe_ventas_mensuales.report_informe_ventas"
+        attachment_use="False"/>
+</odoo>
